@@ -1,5 +1,5 @@
 jumlah = int(input("Masukkan jumlah mata kuliah: "))
-
+print("program perhitungan IPS Mahasiswa")
 total = 0
 
 for i in range(jumlah):
@@ -16,4 +16,4 @@ for i in range(jumlah):
 
 ips = total / jumlah
 
-print("IPS =", ips)
+print("Nilai IPS anda semester ini", round(ips,2))
