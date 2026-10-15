@@ -1,3 +1,35 @@
+select * from dokter 
+where tarif = (select max(tarif) from dokter)
+
+select * from dokter 
+where tarif = (select min(tarif) from dokter)
+
+SELECT satuan, COUNT(*) as jumlah_jenis_obat
+FROM  obat
+group by satuan;
+
+SELECT namaProdi, AVG(harga) AS"Rata-rata harga"
+FROM  obat
+group by satuan;
+
+select count(distinct satuan) as jumlah_satuan 
+from obat;
+
+SELECT satuan, COUNT(*) as jumlah obat
+FROM  resep
+group by id_berobat;
+
+SELECT id_berobat,  GROUP_CONCAT (nama_obat) as daftar_obat
+from resep
+GROUP BY id_berobat;
+
+select distinct o.* from obat o 
+join resep r on o. id_berobat = r
+
+select distinct o.* from obat o
+join resep r on o. id_berobat = r
+join berobat b on r.id_berobat = b.id_berobat
+
 SELECT d.nama_dokter,
        COUNT(b.id_dokter) AS jumlah_periksa
 FROM dokter d
