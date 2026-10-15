@@ -1,0 +1,31 @@
+SELECT DISTINCT obat.nama_obat
+FROM obat, detail_berobat
+WHERE obat.id_obat = detail_berobat.id_obat;
+
+SELECT DISTINCT obat.nama_obat
+FROM obat, detail_berobat
+WHERE obat.id_obat = detail_berobat.id_obat;
+
+SELECT dokter.nama_dokter,
+       COUNT(berobat.id_berobat) AS jumlah_periksa
+FROM dokter
+LEFT JOIN berobat
+ON dokter.id_dokter = berobat.id_dokter
+GROUP BY dokter.nama_dokter
+ORDER BY dokter.nama_dokter;
+
+SELECT DISTINCT pasien.nama_pasien
+FROM pasien
+JOIN berobat
+ON pasien.id_pasien = berobat.id_pasien;
+
+SELECT berobat.id_berobat,
+       SUM(obat.harga) + dokter.tarif AS total_bayar
+FROM berobat
+JOIN dokter
+ON berobat.id_dokter = dokter.id_dokter
+JOIN detail_berobat
+ON berobat.id_berobat = detail_berobat.id_berobat
+JOIN obat
+ON detail_berobat.id_obat = obat.id_obat
+GROUP BY berobat.id_berobat, dokter.tarif;
