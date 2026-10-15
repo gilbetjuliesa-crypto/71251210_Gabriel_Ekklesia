@@ -1,0 +1,20 @@
+SELECT d.nama_dokter,
+       COUNT(b.id_dokter) AS jumlah_periksa
+FROM dokter d
+LEFT JOIN berobat b ON d.id_dokter = b.id_dokter
+GROUP BY d.id_dokter, d.nama_dokter
+ORDER BY d.nama_dokter;
+
+SELECT DISTINCT p.*
+FROM pasien p
+JOIN berobat b ON p.id_pasien = b.id_pasien;
+
+SELECT b.id_berobat,
+       p.nama_pasien,
+       d.tarif + COALESCE(SUM(o.harga), 0) AS total_pembayaran
+FROM berobat b
+JOIN pasien p ON b.id_pasien = p.id_pasien
+JOIN dokter d ON b.id_dokter = d.id_dokter
+LEFT JOIN resep r ON b.id_berobat = r.id_berobat
+LEFT JOIN obat o ON r.id_obat = o.id_obat
+GROUP BY b.id_berobat, p.nama_pasien, d.tarif;
